@@ -194,6 +194,20 @@ h1{
 }
 .chip:hover{ color: var(--text); text-decoration: none; background: rgba(255,255,255,.07); }
 
+/* Compact course bullets under teaching roles */
+.courseBullets{
+  margin: 8px 0 0;
+  padding-left: 18px;  /* keeps the bullet indent consistent */
+  color: var(--muted);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on desktop */
+  gap: 6px 22px;
+}
+
+@media (max-width: 980px){
+  .courseBullets{ grid-template-columns: 1fr; }
+}
+
 /* Sections */
 .section{ padding: 56px 0; }
 .section h2{
@@ -273,6 +287,32 @@ h1{
 .subblock__title{ font-weight: 700; margin-bottom: 6px; }
 
 /* Publications — “selected paper” style */
+
+/* Publications scroll container
+   Adjust --pubMaxH to control when the list becomes scrollable.
+   Example: 520px shows ~3–4 items on desktop (depends on item length).
+*/
+.pubscroll{
+  --pubMaxH: 690px;
+  max-height: var(--pubMaxH);
+  overflow-y: auto;
+  padding-right: 6px; /* space for scrollbar */
+  margin-top: 8px;
+  border-radius: var(--radius);
+}
+
+/* Nice (optional) scrollbar styling */
+.pubscroll::-webkit-scrollbar{ width: 10px; }
+.pubscroll::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.16);
+  border-radius: 999px;
+}
+.pubscroll::-webkit-scrollbar-track{ background: rgba(255,255,255,.04); border-radius: 999px; }
+
+@media (max-width: 980px){
+  .pubscroll{ --pubMaxH: 620px; } /* slightly taller on mobile */
+}
+
 .publist{
   margin: 18px 0 0;
   padding-left: 18px; /* keeps numbering */
@@ -379,24 +419,64 @@ h1{
   line-height: 1.45;
 }
 
-/* Contact form */
-.form label{
+/* Contact */
+
+.contactCard{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,.04);
+}
+
+.contactCard__top{
   display: grid;
-  gap: 6px;
-  margin-bottom: 10px;
-  color: var(--muted);
-  font-size: 14px;
+  gap: 12px;
 }
-input, textarea{
-  width: 100%;
-  padding: 12px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(0,0,0,.18);
+
+.contactCard__headline{
+  margin: 0;
   color: var(--text);
-  outline: none;
 }
-input:focus, textarea:focus{ border-color: rgba(255,255,255,.28); }
+
+.contactActions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contactDetails{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(255,255,255,.14);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.citem{
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+}
+
+.citem__label{
+  color: var(--muted2);
+  font-size: 12.5px;
+  margin-bottom: 4px;
+}
+
+.citem__value{
+  color: var(--text);
+  font-weight: 650;
+  word-break: break-word;
+}
+
+@media (max-width: 980px){
+  .contactDetails{ grid-template-columns: 1fr; }
+}
 
 /* Footer */
 .footer{
